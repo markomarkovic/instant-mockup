@@ -30,11 +30,16 @@
 		$filteredFiles = array();
 
 		/**
-		* Go through all scaned files and see
-		* if any of those files has .jpg extension
-		* and that it starts with one digit, with
-		* leading zero or two digits.
-		* Example: 01.jpg 1.jpg 10.jpg
+		* Valid:
+		* 0.jpg
+		* 01.jpg
+		* 1.jpg
+		* 10.jpg
+		* 1 foo bar.jpg
+		*
+		* Invalid:
+		* foo.jpg
+		* 012 foo bar.jpg
 		*/
 		foreach ($filesInCurrentFolder as $file) {
 			if( preg_match( '/^([0-9]|[0-9][0-9]).*(\.jpg)$/i', $file ) ) {
