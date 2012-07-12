@@ -37,65 +37,63 @@
 		* Example: 01.jpg 1.jpg 10.jpg
 		*/
 		foreach ($filesInCurrentFolder as $file) {
-			if( preg_match( '/([0-9]|[0-9][0-9]).(?:jpg)/i', $file ) ) {
+			if( preg_match( '/^([0-9]|[0-9][0-9]).*(\.jpg)$/i', $file ) ) {
 				$filteredFiles[] = $file;
 			}
 		}
 
 		/**
-		* Sort filtered files so this list:
-		* 1, 11, 12, 2, 3
-		* becomes this list:
-		* * 1, 2, 3, 11, 12
+		* If there are no .jpg images
+		* then just print error message
 		*/
-		sort( $filteredFiles, SORT_NUMERIC );
+		if( empty( $filteredFiles ) ) {
+			echo '<h1>No images found!</h1>';
+		} else {
+			/**
+			* Sort filtered files so this list:
+			* 1, 11, 12, 2, 3
+			* becomes this list:
+			* * 1, 2, 3, 11, 12
+			*/
+			sort( $filteredFiles, SORT_NUMERIC );
 
-		// get index of last element in filtered files array
-		$indexOfLastFilteredFile = key(array_slice($filteredFiles, -1, 1, TRUE));;
+			// get index of last element in filtered files array
+			$indexOfLastFilteredFile = key(array_slice($filteredFiles, -1, 1, TRUE));
 
-		// var_dump($filteredFiles);
+			/**
+			* Get URI and set requested image id
+			*/
+			$uri = $_SERVER["REQUEST_URI"];
 
-		/**
-		* 1. Get URI
-		* 2. Get last two characters
-		* 3. Remove /
-		*
-		* TODO: Needs better solution as the following URL
-		* will be considered as valid:
-		* http://domain.com/XCHNG/some-random-project1/
-		*/
-		$uri = $_SERVER["REQUEST_URI"];
-		$uri = str_replace( '/', '', substr($uri, -2) );
+			$explodedUri = explode( '/', $uri );
 
-		/**
-		* If URI matches one digit, without leading zero,
-		* or two digits - continue, else show first image.
-		*/
-		if( preg_match( '/^([1-9]|[1-9][0-9])$/', $uri ) ) {
+			$requestedImageId = $explodedUri[ key(array_slice( $explodedUri, -1, 1, TRUE)) ];
 
-			// If requested URI does NOT map to empty array element
-			if( $filteredFiles[$uri-1] != '' ) {
+			/**
+			* If requested image id matches one digit(without
+			* leading zero) or two digits AND if requested
+			* image id exists in $filteredFiles continue
+			* else show error message.
+			*/
+			if( preg_match( '/^([1-9]|[1-9][0-9])$/', $requestedImageId ) && array_key_exists($requestedImageId - 1, $filteredFiles) ) {
 
 				/**
 				* Check if requested file is actually last file
 				* and if so link last image to first image.
 				*/
-				if( $indexOfLastFilteredFile == $uri-1 ) {
-					echo '<a href="1"><img src="' . $filteredFiles[$uri-1] . '" alt=""></a>';
+				if( $indexOfLastFilteredFile == $requestedImageId - 1 ) {
+					echo '<a href="1"><img src="' . $filteredFiles[$requestedImageId - 1] . '" alt=""></a>';
 				} else {
-					echo '<a href="' . ($uri + 1) . '"><img src="' . $filteredFiles[$uri-1] . '" alt=""></a>';
+					echo '<a href="' . ($requestedImageId + 1) . '"><img src="' . $filteredFiles[$requestedImageId - 1] . '" alt=""></a>';
 				}
+
 			} else {
-
-				// SCREAM BLOODY GORE!
-				echo "<h1>OMG</h1>";
-
+				if( $requestedImageId == '' ) {
+					echo '<a href="2"><img src="' . $filteredFiles[0] . '" alt=""></a>';
+				} else {
+					echo '<h1>ERROR!</h1>';
+				}
 			}
-
-		} else {
-
-			echo '<a href="2"><img src="' . $filteredFiles[0] . '" alt=""></a>';
-
 		}
 	?>
 </body>
