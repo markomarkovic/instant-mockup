@@ -81,7 +81,6 @@
 			* else show error message.
 			*/
 			if( preg_match( '/^([1-9]|[1-9][0-9])$/', $requestedImageId ) && array_key_exists($requestedImageId - 1, $filteredFiles) ) {
-
 				/**
 				* Check if requested file is actually last file
 				* and if so link last image to first image.
@@ -91,7 +90,6 @@
 				} else {
 					echo '<a href="' . ($requestedImageId + 1) . '"><img src="' . $filteredFiles[$requestedImageId - 1] . '" alt=""></a>';
 				}
-
 			} else {
 				if( $requestedImageId == '' ) {
 					echo '<a href="2"><img src="' . $filteredFiles[0] . '" alt=""></a>';
