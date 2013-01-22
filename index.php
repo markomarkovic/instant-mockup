@@ -5,16 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Instant Mockup</title>
 	<meta name="viewport" content="width=device-width">
-	<style type="text/css">
-* {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	text-align: center;
-}
-	</style>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
 <?php
