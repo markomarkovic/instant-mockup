@@ -42,7 +42,7 @@
 		* 012 foo bar.jpg
 		*/
 		foreach ($filesInCurrentFolder as $file) {
-			if( preg_match( '/^([0-9]|[0-9][0-9]).*(\.jpg)$/i', $file ) ) {
+			if( preg_match( '/^([0-9]|[0-9][0-9]).*(\.jpe?g|\.png|\.gif)$/i', $file ) ) {
 				$filteredFiles[] = $file;
 			}
 		}
