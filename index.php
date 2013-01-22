@@ -31,10 +31,11 @@ if (empty($allFiles))
 // Sort them 'naturally'
 sort($allFiles, SORT_NATURAL);
 
-// Determining current, next, and last file index. First is 1.
+// Determining current, previous, next, and last file index. First is 1.
 $current = (isset($_GET['n']) && is_numeric($_GET['n'])) ? intval($_GET['n']) : 1;
 $last = count($allFiles);
 $next = ($current < $last) ? $current + 1 : 1; // Wrap-around
+$previous = ($current > 1) ? $current - 1 : $last; // Around-wrap
 
 ?>
 
