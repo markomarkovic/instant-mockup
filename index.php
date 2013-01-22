@@ -44,7 +44,9 @@ $previous = ($current > 1) ? $current - 1 : $last; // Around-wrap
 			<ul>
 				<li><a href="?n=<?php echo $previous;?>">Prev</a></li>
 				<?php for ($i = 1; $i <= $last; $i++):?>
-					<li class="<?php echo ($i == $current) ? 'active' : '';?>"><a href="?n=<?php echo $i;?>"><?php echo $i;?></a></li>
+					<li class="<?php echo ($i == $current) ? 'active' : '';?>">
+						<a href="?n=<?php echo $i;?>"><?php echo $i;?></a>
+					</li>
 				<?php endfor;?>
 				<li><a href="?n=<?php echo $next;?>">Next</a></li>
 			</ul>
