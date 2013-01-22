@@ -26,7 +26,7 @@ foreach ($allFiles as $key => $file)
 // Check weather there are any images
 if (empty($allFiles))
 {
-	die('No images found.');
+	die('<div class="alert alert-error" style="margin: 10% 30%;">No images found.</div>');
 }
 
 // Sort them 'naturally'
