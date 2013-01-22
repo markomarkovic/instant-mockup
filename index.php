@@ -8,6 +8,7 @@
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
+	<div class="container">
 <?php
 
 // Read all the files in the current directory
@@ -39,9 +40,10 @@ $previous = ($current > 1) ? $current - 1 : $last; // Around-wrap
 
 ?>
 
-<a href="?n=<?php echo $next;?>">
-	<img src="<?php echo $allFiles[$current-1];?>" alt="<?php echo $allFiles[$current-1];?>">
-</a>
+		<a href="?n=<?php echo $next;?>">
+			<img src="<?php echo $allFiles[$current-1];?>" alt="<?php echo $allFiles[$current-1];?>">
+		</a>
 
+	</div>
 </body>
 </html>
