@@ -50,7 +50,7 @@ $previous = ($current > 1) ? $current - 1 : $last; // Around-wrap
 			</ul>
 		</div>
 
-		<a href="?n=<?php echo $next;?>">
+		<a href="?n=<?php echo $next;?>" class="thumbnail">
 			<img src="<?php echo $allFiles[$current-1];?>" alt="<?php echo $allFiles[$current-1];?>">
 		</a>
 
